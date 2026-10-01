@@ -1,0 +1,6 @@
+@import "tailwindcss";
+@source "../../templates/**/*.html";
+
+/* GlassLedger's CryoGlass component layer is kept as authored CSS so the app can
+   run without Node. `npm run css:build` produces app.css when you customize Tailwind. */
+@import "./cryo.css";

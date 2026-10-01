@@ -1,0 +1,30 @@
+{% extends 'layouts/base.html' %}
+{% block title %}Sign in · GlassLedger{% endblock %}
+{% block auth_content %}
+<div class="auth-shell">
+    <section class="login-card glass-panel page-enter">
+        <div class="login-crystal"><span>GL</span></div>
+        <p class="eyebrow">Inventory with a memory.</p>
+        <h1>Welcome to GlassLedger</h1>
+        <p class="muted">Sign in to your inventory command center.</p>
+
+        <form method="post" class="form-stack" novalidate>
+            {{ form.hidden_tag() }}
+            <label class="field">
+                <span>{{ form.username.label.text }}</span>
+                {{ form.username(class_='input', autocomplete='username', placeholder='your username') }}
+                {% for error in form.username.errors %}<small class="field-error">{{ error }}</small>{% endfor %}
+            </label>
+            <label class="field">
+                <span>{{ form.password.label.text }}</span>
+                {{ form.password(class_='input', autocomplete='current-password', placeholder='••••••••') }}
+                {% for error in form.password.errors %}<small class="field-error">{{ error }}</small>{% endfor %}
+            </label>
+            <label class="check-row">{{ form.remember() }} <span>Keep me signed in</span></label>
+            {{ form.submit(class_='primary-button') }}
+        </form>
+
+        <p class="login-note">CryoGlass · GlassLedger v{{ app_version }}</p>
+    </section>
+</div>
+{% endblock %}

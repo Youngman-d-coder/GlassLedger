@@ -1,0 +1,23 @@
+{% extends 'layouts/base.html' %}
+{% block content %}
+<section class="hero"><div><p class="eyebrow">Transaction</p><h1>{{page_title}}</h1><p>Every saved movement becomes part of the permanent audit trail.</p></div></section>
+<form method="post" class="glass-card form-grid" id="transactionForm">
+<input type="hidden" name="csrf_token" value="{{csrf_token()}}">
+<label>Product<select name="item_id" id="itemSelect" required>{% for i in items %}<option value="{{i.id}}" {% if selected and selected.id==i.id %}selected{% endif %}>{{i.name}}</option>{% endfor %}</select></label>
+<label>Quantity<input type="number" name="quantity" id="quantityInput" min="1" required></label>
+<label>Unit<select name="unit_id" id="unitSelect" required></select><small id="conversionHint">Choose a configured unit.</small></label>
+<div class="glass-mini" id="stockPreview"><small>Current stock</small><strong id="currentStock">Loading…</strong><span id="afterStock"></span></div>
+<label>Destination / department<input name="destination"></label>
+<label>Purpose<input name="purpose" placeholder="Routine laboratory use"></label>
+<div id="batchIssueWrap" class="full" hidden><label>Batch <select name="batch_id" id="batchSelect"><option value="">Select batch</option></select><small>For expiry-aware items, use the earliest-expiring usable batch first.</small></label></div>
+{% if tx_type in ['RECEIPT','OPENING_BALANCE','RETURN_IN'] %}
+<label>Batch number<input name="batch_number"></label><label>Expiry date<input type="date" name="expiry_date"></label><label>Supplier<input name="supplier"></label>
+{% endif %}
+{% if tx_type.startswith('ADJUSTMENT') %}<label>Adjustment reason<select name="reason_code"><option>Physical Count Difference</option><option>Data Entry Correction</option><option>Damaged</option><option>Missing</option><option>Expired</option><option>Other</option></select></label>{% endif %}
+<label class="full">Notes<textarea name="notes"></textarea></label>
+<div class="full actions"><button class="btn primary">Record transaction</button></div>
+</form>
+<script>
+window.GLASSLEDGER_TX = {txType: {{tx_type|tojson}}, dataUrl: {{url_for('inventory.unit_data', item_id=0)|tojson}} };
+</script>
+{% endblock %}

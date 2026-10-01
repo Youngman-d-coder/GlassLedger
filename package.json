@@ -1,0 +1,13 @@
+{
+  "name": "glassledger",
+  "private": true,
+  "version": "1.0.0",
+  "scripts": {
+    "css:build": "npx @tailwindcss/cli -i ./app/static/css/input.css -o ./app/static/css/app.css --minify",
+    "css:watch": "npx @tailwindcss/cli -i ./app/static/css/input.css -o ./app/static/css/app.css --watch"
+  },
+  "devDependencies": {
+    "@tailwindcss/cli": "^4.1.0",
+    "tailwindcss": "^4.1.0"
+  }
+}

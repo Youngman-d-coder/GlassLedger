@@ -1,0 +1,1 @@
+{% extends 'layouts/base.html' %}{% block content %}<section class="glass-card"><h1>Secure link created</h1><p>This URL grants temporary access to {{report.reference}}.</p><input value="{{share_url}}" readonly onclick="this.select()"><p class="muted">Copy it and send it to your manager.</p></section>{% endblock %}
