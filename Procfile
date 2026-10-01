@@ -1,1 +1,1 @@
-web: waitress-serve --listen=*:8000 --call app:create_app
+web: python -m waitress --listen=0.0.0.0:$PORT --call app:create_app
